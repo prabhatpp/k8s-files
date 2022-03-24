@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: firstdeploy
+spec:
+ replicas: 3
+ selector:
+   matchLabels:
+     app: web
+ template:
+   metadata:
+     labels:
+        app: web
+   spec:
+     serviceAccountName: env-account
+     volumes:
+     - name: secrets-store-inline
+       csi:
+         driver: secrets-store.csi.k8s.io
+         readOnly: true
+         volumeAttributes:
+           secretProviderClass: "env-aws-secrets"
+     containers:
+       - name: mycontainer
+         image: 692851696394.dkr.ecr.us-east-1.amazonaws.com/test:10
+         ports:
+           - containerPort: 8000
+         volumeMounts:
+         - name: secrets-store-inline
+           mountPath: "/mnt/secrets"
+           readOnly: true
+     imagePullSecrets:
+         - name: regcred
+ 
+ 
+---
+ 
+apiVersion: v1
+kind: Service
+metadata:
+ name: web-svc
+spec:
+ ports:
+   - port: 80
+     targetPort: 8000
+     nodePort: 31000
+ type: NodePort
+ selector:
+   app: web
