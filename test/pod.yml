@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: fitpod
+spec:
+   containers:
+     - name: firstc
+       image: mysql:5.6
+       volumeMounts:
+         - name: myssql
+           mountPath: /docker-entrypoint-initdb.d
+       env:
+         - name: MYSQL_ROOT_PASSWORD
+           value: asdfghjkl
+   volumes:
+     - name: myssql
+       configMap:
+         name: mysql-script
