@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/sauravsa21/k8s-files.git
-    targetRevison: HEAD
+    targetRevision: HEAD
     path: test
   destination:
     server: https://kubernetes.default.svc
