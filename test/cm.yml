@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-script
+data:
+  myscript.sql: |-
+    create database test;
