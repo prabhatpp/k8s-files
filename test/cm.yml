@@ -4,4 +4,4 @@ metadata:
   name: mysql-script
 data:
   myscript.sql: |-
-    create database test;
+    create database testing;
