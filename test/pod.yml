@@ -11,7 +11,7 @@ spec:
            mountPath: /docker-entrypoint-initdb.d
        env:
          - name: MYSQL_ROOT_PASSWORD
-           value: asdfghjkl
+           value: asdfhjkl
    volumes:
      - name: myssql
        configMap:
